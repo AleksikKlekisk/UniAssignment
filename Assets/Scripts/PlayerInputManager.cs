@@ -49,6 +49,10 @@ public class PlayerInputManager : MonoBehaviour {
         if(HasPlayerJumped()) {
             Debug.Log("Player has jumped");
         }
+
+    }
+    public Vector2 GetPlayerMouse() {
+        return PlayerControls.Player.Look.ReadValue<Vector2>();
     }
 }
 
