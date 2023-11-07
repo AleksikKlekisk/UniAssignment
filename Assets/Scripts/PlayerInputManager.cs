@@ -54,6 +54,10 @@ public class PlayerInputManager : MonoBehaviour {
     public Vector2 GetPlayerMouse() {
         return PlayerControls.Player.Look.ReadValue<Vector2>();
     }
+
+    public bool GetPlayerInteraction() {
+        return PlayerControls.Player.Interaction.ReadValue<bool>();
+    }
 }
 
 
