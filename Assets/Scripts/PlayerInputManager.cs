@@ -56,7 +56,7 @@ public class PlayerInputManager : MonoBehaviour {
     }
 
     public bool GetPlayerInteraction() {
-        return PlayerControls.Player.Interaction.ReadValue<bool>();
+        return PlayerControls.Player.Interaction.triggered;
     }
 }
 

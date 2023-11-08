@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance = 0.4f;
     public LayerMask groundMask;
+    public AudioSource SoundManager;
+    public AudioClip jumpSound;
     void Start()
     {
         inputManager = PlayerInputManager.Instance;
@@ -37,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         //jump
         if(jump && isGrounded) {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            SoundManager.PlayOneShot(jumpSound);
         }
         controller.Move(move * speed * Time.deltaTime);
 
