@@ -11,12 +11,13 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
     [SerializeField] float speed = 12f;
     [SerializeField] float jumpHeight = 3f;
-
+    public bool isBoosted = false;
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundDistance = 0.4f;
     public LayerMask groundMask;
     public AudioSource SoundManager;
     public AudioClip jumpSound;
+    public float boost = 10f;
     void Start()
     {
         inputManager = PlayerInputManager.Instance;
@@ -36,7 +37,11 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * y;
 
-        //jump
+        //Boost
+        if (isBoosted && isGrounded) {
+            velocity.y = Mathf.Sqrt(boost * -2f * gravity);
+        }
+        //Jump
         if(jump && isGrounded) {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             SoundManager.PlayOneShot(jumpSound);

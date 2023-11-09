@@ -11,9 +11,8 @@ public class Menu : MonoBehaviour
 
     //Player prefs, and sensitivity slider
     private void Start() {
-        sensitivitySlider = GetComponent<Slider>();
         sensitivity = GetComponent<MouseLook>();
-        SetSensitivity(PlayerPrefs.GetFloat("MouseSensitivity", 100));
+       
     }
 
     public void SetSensitivity(float value) {
@@ -25,8 +24,8 @@ public class Menu : MonoBehaviour
         sensitivity.mouseSensitivity = (Mathf.Log10(value / 100) * 20f);
         
     }
-    public void SetSensitivityFromSlider(float sensitivity) { 
-        sensitivitySlider.value = sensitivity;
+    public void SetSensitivityFromSlider() { 
+        GameManager.Instance.sensitivity = sensitivitySlider.value * 100f;
     }
 
     public void RefreshSlider(float value) {

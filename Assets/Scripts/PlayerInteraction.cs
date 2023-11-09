@@ -12,9 +12,6 @@ public class PlayerInteraction : MonoBehaviour {
     bool isKeyPickedUp = false;
     void Start() {
         inputManager = PlayerInputManager.Instance;
-
-
-
     }
 
 
@@ -26,23 +23,27 @@ public class PlayerInteraction : MonoBehaviour {
         //DOOR
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range)) {
             Animator doorAnim = hit.collider.transform.root.gameObject.GetComponent<Animator>();
-            if (hit.collider.CompareTag("Door") && Input.GetKeyDown(KeyCode.F) && isKeyPickedUp) {
-                Debug.Log("Yes.it works");
-                doorAnim.SetTrigger("Update");
+            if (inputManager.GetPlayerInteraction()) {
+                
+                if (hit.collider.CompareTag("Door") && isKeyPickedUp) {
+                    Debug.Log("Yes.it works");
+                    doorAnim.SetTrigger("Update");
 
-            }
-            else if (hit.collider.CompareTag("Door") && Input.GetKeyDown(KeyCode.F)) {
-                Debug.Log("need a key");
-            }
-            //key pickup
-            if (hit.collider.CompareTag("Key") && Input.GetKeyDown(KeyCode.F)) {
-                isKeyPickedUp = true;
-                Destroy(key);
-                Debug.Log("Picked up key");
-                // add key as a UI element
+                }
+                else if (hit.collider.CompareTag("Door") && isKeyPickedUp == false) {
+                    Debug.Log("need a key");
+                }
+                //key pickup
+                if (hit.collider.CompareTag("Key")) {
+                    isKeyPickedUp = true;
+                    Destroy(key);
+                    Debug.Log("Picked up key");
+                    // add key as a UI element
 
 
+                }
             }
+            
         }
 
     }
